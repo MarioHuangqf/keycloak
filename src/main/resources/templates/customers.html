@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>需要user权限</title>
 </head>
 <body>
     <h1>Hello, <span th:text="${username}">--name--</span>.</h1>
+    <h1 sec:authorize="hasRole('user')">页面权限</h1>
     <a th:href="@{/logout}">登出</a>
 </body>
 </html>

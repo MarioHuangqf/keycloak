@@ -1,5 +1,8 @@
 package com.example.keycloak.controller;
 
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,9 @@ import java.security.Principal;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private KeycloakRestTemplate template;
 
     // 公开页
     @GetMapping("/")
@@ -30,5 +36,17 @@ public class HomeController {
     public String logout(HttpServletRequest request) throws ServletException {
         request.logout();
         return "redirect:/";
+    }
+
+
+    // 私有方法
+    public KeycloakPrincipal getKeycloakPrinciple(HttpServletRequest request){
+        KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal)request.getUserPrincipal();
+        return keycloakPrincipal;
+    }
+
+    public String getTokenString(HttpServletRequest request){
+        String tokenString = getKeycloakPrinciple(request).getKeycloakSecurityContext().getTokenString();
+        return tokenString;
     }
 }
