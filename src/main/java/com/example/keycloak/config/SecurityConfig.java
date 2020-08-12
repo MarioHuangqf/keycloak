@@ -64,31 +64,4 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("/customers*").hasRole("user")
                 .anyRequest().permitAll();
     }
-
-    // 成功处理
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new AuthenticationSuccessHandler() {
-
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                Authentication authentication) throws IOException, ServletException {
-                System.out.println("认证成功");
-            }
-        };
-    }
-
-    // 失败处理
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new AuthenticationFailureHandler() {
-
-            @Override
-            public void onAuthenticationFailure(HttpServletRequest servletRequest, HttpServletResponse servletResponse,
-                                                AuthenticationException exception) throws IOException, ServletException {
-                System.out.println("认证失败");
-            }
-
-        };
-    }
 }
