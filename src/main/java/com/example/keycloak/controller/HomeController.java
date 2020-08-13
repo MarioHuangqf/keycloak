@@ -1,12 +1,15 @@
 package com.example.keycloak.controller;
 
+import com.example.keycloak.util.KeycloakContext;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,8 @@ public class HomeController {
     @Autowired
     private KeycloakRestTemplate template;
 
+    private String endPoint = "";
+
     // 公开页
     @GetMapping("/")
     public String index() {
@@ -27,6 +32,8 @@ public class HomeController {
     // 权限页
     @GetMapping("/customers")
     public String customers(Principal principal, Model model) {
+        System.out.println(KeycloakContext.getUsername().get());
+        System.out.println(KeycloakContext.getAccessToken().get());
         model.addAttribute("username", principal.getName());
         return "customers";
     }
@@ -38,6 +45,19 @@ public class HomeController {
         return "redirect:/";
     }
 
+    // 后端服务器通信
+    @GetMapping("/toClient")
+    @ResponseBody
+    public String clientToClient() {
+        ResponseEntity<String> message = template.getForEntity(endPoint, String.class);
+        return message.getBody();
+    }
+
+    @PostMapping("/createUser")
+    @ResponseBody
+    public void createUser() {
+
+    }
 
     // 私有方法
     public KeycloakPrincipal getKeycloakPrinciple(HttpServletRequest request){
