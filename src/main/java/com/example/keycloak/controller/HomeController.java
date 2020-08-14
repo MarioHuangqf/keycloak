@@ -3,6 +3,8 @@ package com.example.keycloak.controller;
 import com.example.keycloak.util.KeycloakContext;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.idm.RealmRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,7 +58,13 @@ public class HomeController {
     @PostMapping("/createUser")
     @ResponseBody
     public void createUser() {
-
+//        Keycloak keycloak = Keycloak.getInstance(
+//                "http://localhost:8080/auth",
+//                "master",
+//                "admin",
+//                "password",
+//                "admin-cli");
+//        RealmRepresentation realm = keycloak.realm("master").toRepresentation();
     }
 
     // 私有方法

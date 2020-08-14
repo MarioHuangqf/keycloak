@@ -33,6 +33,13 @@
             <version>10.0.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-admin-client -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>10.0.2</version>
+        </dependency>
+
         <!-- thymeleaf security 拓展 -->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
