@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>keycloak</artifactId>
+    <artifactId>keycloak-springSecurity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>keycloak</name>
+    <name>keycloak-springSecurity</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
